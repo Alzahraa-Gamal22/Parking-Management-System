@@ -38,8 +38,7 @@ class ParkingLot:
         return None
 
     # Vehicle Entry
-    def vehicle_entry(self, vehicle):
-
+    def vehicle_entry(self, vehicle, entry_time=None):
         # Check if vehicle is already inside
         existing_vehicle, existing_spot = self.find_vehicle(
             vehicle.get_license_plate()
@@ -57,7 +56,7 @@ class ParkingLot:
             return False
 
         # Enter vehicle
-        vehicle.enter()
+        vehicle.enter(entry_time)
 
         # Park vehicle
         if spot.park_vehicle(vehicle):
@@ -73,7 +72,7 @@ class ParkingLot:
         return False
 
     # Vehicle Exit
-    def vehicle_exit(self, license_plate):
+    def vehicle_exit(self, license_plate, exit_time=None):
 
         vehicle, spot = self.find_vehicle(license_plate)
 
@@ -82,7 +81,7 @@ class ParkingLot:
             return False
 
         # Set exit time
-        vehicle.exit()
+        vehicle.exit(exit_time)
 
         # Calculate cost
         cost = vehicle.calculate_cost()

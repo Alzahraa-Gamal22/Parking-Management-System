@@ -15,14 +15,16 @@ class Vehicle:
     def get_exit_time(self):
         return self.__exit_time
 
+
     # Entry
-    def enter(self):
-        self.__entry_time = datetime.now()
+    def enter(self, entry_time=None):
+        self.__entry_time = entry_time or datetime.now()
 
     # Exit
-    def exit(self):
-        self.__exit_time = datetime.now()
+    def exit(self, exit_time=None):
+        self.__exit_time = exit_time or datetime.now()
 
+    
     # Calculate parking duration
     def get_duration_hours(self):
         if self.__entry_time is None:

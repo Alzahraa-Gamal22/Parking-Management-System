@@ -42,7 +42,7 @@ class DataManager:
     # ==========================================
 
     # Add a vehicle to the parking lot
-    def add_vehicle(self, vehicle):
+    def add_vehicle(self, vehicle, entry_time=None):
 
         plate = vehicle.get_license_plate()
 
@@ -51,7 +51,7 @@ class DataManager:
                 f"Vehicle with plate '{plate}' is already parked."
             )
 
-        success = self.__parking_lot.vehicle_entry(vehicle)
+        success = self.__parking_lot.vehicle_entry(vehicle, entry_time)
 
         if not success:
             raise InvalidSpotError("No available spot for this vehicle.")
@@ -69,7 +69,7 @@ class DataManager:
         return True
 
     # Remove a vehicle from the parking lot
-    def delete_vehicle(self, plate):
+    def delete_vehicle(self, plate, exit_time=None):
 
         if plate not in self.__active_plates:
             raise VehicleNotFoundError(
@@ -78,7 +78,7 @@ class DataManager:
 
         vehicle = self.__vehicles[plate]
 
-        success = self.__parking_lot.vehicle_exit(plate)
+        success = self.__parking_lot.vehicle_exit(plate, exit_time)
 
         if not success:
             raise VehicleNotFoundError(
